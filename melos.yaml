@@ -1,0 +1,55 @@
+name: rock_w
+
+packages:
+  - packages/**
+
+scripts:
+  analyze:
+    run: melos exec -c 3 --file-exists="analysis_options.yaml" --fail-fast -- "flutter analyze"
+    description: |
+      Run `flutter analyze` in all packages.
+      - Note: you can also rely on your IDEs Dart Analysis / Issues window.
+    select-package:
+      flutter: true
+
+  analyze:all:
+    run: melos run analyze --no-select
+    description: Analysis all packages in this project.
+
+  generate:all:
+    run: melos run generate
+    description: Build all generated files for Dart & Flutter packages in this project.
+
+  generate:
+    run: melos exec -c 1 --depends-on="build_runner" --flutter -- "flutter pub run build_runner build --delete-conflicting-outputs"
+    description: Build all generated files for Flutter packages in this project.
+    select-package:
+      flutter: true
+
+  test:all:
+    run: |
+      melos exec --fail-fast -- "flutter test --coverage"
+      melos exec --dir-exists=coverage -- "genhtml -o coverage/html coverage/lcov.info"
+    description: Run all Dart & Flutter tests in this project and generate HTML coverage reports.
+
+  test:
+    run: melos exec --fail-fast -- "flutter test"
+    description: Run tests in all packages.
+    select-package:
+      flutter: true
+
+  coverage:
+    run: melos exec --dir-exists=coverage -- "genhtml -o coverage/html coverage/lcov.info"
+    description: Generate HTML coverage reports from existing lcov data.
+
+  coverage:view:
+    run: open coverage/html/index.html
+    description: Open the HTML coverage report in the default web browser.
+
+  lint:
+    run: melos exec -- "dart analyze ."
+    description: Run the Dart analyzer on all packages.
+
+  format:
+    run: melos exec -- "dart format ."
+    description: Format all Dart files in the repository.
