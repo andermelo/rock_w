@@ -35,14 +35,14 @@ void main() {
     WeatherEntity? result =
         await getIt.get<WeatherCurrentService>().get(1212.0, 89898.0);
 
-    expect(result?.id, '3163858');
-    expect(result?.coord['lon'], 10.99);
-    expect(result?.coord['lat'], 44.34);
-    expect(result?.main, 'Rain');
-    expect(result?.descriptiton, 'moderate rain');
-    expect(result?.temp, 298.48);
-    expect(result?.tempMin, 297.56);
-    expect(result?.tempMax, 300.05);
-    expect(result?.date, '2022-08-30 – 11:43');
+    expect(result.id, '3163858');
+    expect(result.coord['lon'], 10.99);
+    expect(result.coord['lat'], 44.34);
+    expect(result.main, 'Rain');
+    expect(result.description, 'moderate rain');
+    expect(result.temp, 298.48);
+    expect(result.tempMin, 297.56);
+    expect(result.tempMax, 300.05);
+    expect(result.date, '2022-08-30 – 11:43');
   });
 }

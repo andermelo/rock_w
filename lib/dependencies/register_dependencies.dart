@@ -3,6 +3,8 @@ import 'package:rock_w/core/http/app_http.dart';
 import 'package:rock_w/core/http/app_http_impl.dart';
 import 'package:rock_w/features/weather_current/interactor/service/current_service.dart';
 import 'package:rock_w/features/weather_current/interactor/service/current_service_impl.dart';
+import 'package:rock_w/features/weather_forecast/interactor/service/forecast_service.dart';
+import 'package:rock_w/features/weather_forecast/interactor/service/forecast_service_impl.dart';
 
 class RegisterDependencies {
   static on(GetIt getIt) {
@@ -16,5 +18,7 @@ class RegisterDependencies {
     ///
     getIt.registerLazySingleton<WeatherCurrentService>(
         () => WeatherCurrentServiceImpl());
+    getIt.registerLazySingleton<WeatherForecastService>(
+        () => WeatherForecastServiceImpl());
   }
 }

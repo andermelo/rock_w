@@ -8,7 +8,7 @@ import 'package:rock_w/features/weather_current/interactor/service/current_servi
 
 class WeatherCurrentServiceImpl extends WeatherCurrentService {
   @override
-  Future<WeatherEntity?> get(double lon, double lat) async {
+  Future<WeatherEntity> get(double lon, double lat) async {
     try {
       final appHttp = GetIt.I.get<AppHttp>();
       final response =
@@ -17,7 +17,7 @@ class WeatherCurrentServiceImpl extends WeatherCurrentService {
       return result;
     } catch (e) {
       log(e.toString());
+      throw Exception(e);
     }
-    return null;
   }
 }
