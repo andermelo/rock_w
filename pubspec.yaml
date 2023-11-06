@@ -23,6 +23,7 @@ dependencies:
   equatable: ^2.0.5
   get_it: ^7.6.4
   intl: ^0.18.1
+  connectivity_plus: ^5.0.1
   
 
 dev_dependencies:
@@ -33,6 +34,7 @@ dev_dependencies:
   mocktail: ^1.0.1
   coverage: ^1.6.4
   melos: ^3.2.0
+  hive_test: ^1.0.0
 
 
 flutter:

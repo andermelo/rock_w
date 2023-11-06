@@ -25,11 +25,11 @@ scripts:
     description: Build all generated files for Flutter packages in this project.
     select-package:
       flutter: true
-
+  
   test:all:
     run: |
       melos exec --fail-fast -- "flutter test --coverage"
-      melos exec --dir-exists=coverage -- "genhtml -o coverage/html coverage/lcov.info"
+      melos exec --dir-exists=coverage -- "genhtml coverage/lcov.info -o coverage/html"
     description: Run all Dart & Flutter tests in this project and generate HTML coverage reports.
 
   test:
