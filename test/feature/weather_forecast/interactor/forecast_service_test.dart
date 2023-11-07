@@ -35,5 +35,7 @@ void main() {
         await getIt.get<WeatherForecastService>().get(1212.0, 89898.0);
 
     expect(result.cityId, '3163858');
+    expect(result.name, 'Zocca');
+    expect(result.country, 'IT');
   });
 }

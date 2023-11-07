@@ -32,14 +32,14 @@ class WeatherDto {
     var country = json['sys']?['country'] ?? 'Unknown';
     var id = json['id']?.toString() ?? '';
     var name = json['name'] ?? 'Unknown';
-    var coord = {
+    Map<String, double> coord = {
       'lon': json['coord']?['lon']?.toDouble() ?? 0.0,
       'lat': json['coord']?['lat']?.toDouble() ?? 0.0,
     };
 
     return WeatherDto(
       id: id,
-      coord: coord as Map<String, double>,
+      coord: coord,
       name: name,
       country: country,
       main: json['weather'][0]['main'],
