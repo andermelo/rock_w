@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
+import 'package:rock_w/core/style/theme.dart';
 import 'package:rock_w/dependencies/register_dependencies.dart';
 
 void main() async {
@@ -17,6 +18,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'RockW',
       home: Container(),
+      theme: ThemeData.light(useMaterial3: true).copyWith(
+        textTheme: AppStyleTheme().textTheme,
+      ),
     );
   }
 }

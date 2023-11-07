@@ -1,0 +1,25 @@
+{
+    "cities": {
+      "Silverstone": {
+        "country_code": "GB",
+        "latitude": 52.0733,
+        "longitude": -1.0137
+      },
+      "São Paulo": {
+        "country_code": "BR",
+        "latitude": -23.5505,
+        "longitude": -46.6333
+      },
+      "Melbourne": {
+        "country_code": "AU",
+        "latitude": -37.8136,
+        "longitude": 144.9631
+      },
+      "Monte Carlo": {
+        "country_code": "MC",
+        "latitude": 43.7384,
+        "longitude": 7.4246
+      }
+    }
+  }
+  

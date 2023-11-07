@@ -1,8 +1,12 @@
 import 'dart:convert';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:rock_w/core/database/app_database.dart';
+import 'package:rock_w/core/database/app_database_impl.dart';
+import 'package:rock_w/core/http/app_cache_interceptor.dart';
 import 'package:rock_w/core/http/app_http.dart';
 import 'package:rock_w/features/weather_forecast/entity/forecast_entity.dart';
 import 'package:rock_w/features/weather_forecast/interactor/service/forecast_service.dart';
@@ -12,8 +16,14 @@ import 'forecast_service_mock.dart';
 
 class MockHttp extends Mock implements AppHttp {}
 
+class MockConnectivity extends Mock implements Connectivity {}
+
+class MockAppDatabaseImpl extends Mock implements AppDatabaseImpl {}
+
 void main() {
   final getIt = GetIt.instance;
+  final mockConnectivity = MockConnectivity();
+  final mockAppDatabaseImpl = MockAppDatabaseImpl();
 
   setUp(() {
     getIt.reset();
@@ -24,6 +34,15 @@ void main() {
           data: json.decode(forecastResponseMock),
           statusCode: 200,
         ));
+
+    getIt.registerSingleton<Connectivity>(mockConnectivity);
+    getIt.registerSingleton<AppDatabase>(mockAppDatabaseImpl);
+    getIt.registerSingleton<AppCacheInterceptor>(
+      AppCacheInterceptor(
+        appDatabase: mockAppDatabaseImpl,
+        connectivity: mockConnectivity,
+      ),
+    );
 
     getIt.registerLazySingleton<AppHttp>(() => mockHttp);
     getIt.registerLazySingleton<WeatherForecastService>(
@@ -37,5 +56,10 @@ void main() {
     expect(result.cityId, '3163858');
     expect(result.name, 'Zocca');
     expect(result.country, 'IT');
+    expect(result.forecast.length, 4);
+    expect(result.forecast.first.temp, 296.76);
+    expect(result.forecast.first.tempMin, 296.76);
+    expect(result.forecast.first.tempMax, 297.87);
+    expect(result.forecast.first.date, '2022-08-30 – 12:00');
   });
 }
