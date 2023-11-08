@@ -26,7 +26,7 @@ class WeatherDto {
     required this.dt,
   });
 
-  factory WeatherDto.fromJson(Map<String, dynamic> json) {
+  factory WeatherDto.fromJson(json) {
     // Adapts to JSON variations from forecast queries, extracting 'country', 'id',
     // 'name', and 'coord'. Defaults are used for missing keys to ensure data integrity.
     var country = json['sys']?['country'] ?? 'Unknown';

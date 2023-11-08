@@ -7,7 +7,10 @@ class AppStyleTheme {
     displayMedium: TextStyle(
         fontSize: 28.0, fontWeight: FontWeight.bold, color: Colors.white),
     titleLarge: TextStyle(
-        fontSize: 26.0, fontWeight: FontWeight.bold, color: Colors.white),
+      fontSize: 26.0,
+      fontWeight: FontWeight.bold,
+      color: Colors.white,
+    ),
     bodySmall: TextStyle(fontSize: 15.0, color: Colors.white),
   );
 }

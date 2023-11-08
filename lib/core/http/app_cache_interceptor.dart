@@ -1,9 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:rock_w/core/database/app_database_impl.dart';
+import 'package:rock_w/core/database/app_database.dart';
 
 class AppCacheInterceptor extends InterceptorsWrapper {
-  final AppDatabaseImpl appDatabase;
+  final AppDatabase appDatabase;
   final Connectivity connectivity;
 
   AppCacheInterceptor({required this.appDatabase, required this.connectivity});

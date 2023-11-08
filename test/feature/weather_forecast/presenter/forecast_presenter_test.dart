@@ -3,8 +3,8 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:rock_w/features/weather_forecast/entity/forecast_entity.dart';
-import 'package:rock_w/features/weather_forecast/interactor/presenter/forecast_presenter.dart';
-import 'package:rock_w/features/weather_forecast/interactor/presenter/forecast_state.dart';
+import 'package:rock_w/features/weather_forecast/presenter/forecast_presenter.dart';
+import 'package:rock_w/features/weather_forecast/presenter/forecast_state.dart';
 import 'package:rock_w/features/weather_forecast/interactor/service/forecast_service.dart';
 
 class MockWeatherForecastService extends Mock

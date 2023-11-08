@@ -2,7 +2,7 @@ import 'dart:developer';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:rock_w/features/weather_forecast/entity/forecast_entity.dart';
-import 'package:rock_w/features/weather_forecast/interactor/presenter/forecast_state.dart';
+import 'package:rock_w/features/weather_forecast/presenter/forecast_state.dart';
 import 'package:rock_w/features/weather_forecast/interactor/service/forecast_service.dart';
 
 class ForecastPresenter extends Cubit<ForecastState> {
