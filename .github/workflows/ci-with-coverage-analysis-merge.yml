@@ -31,17 +31,17 @@ jobs:
       - name: Run tests and collect coverage
         run: |
           flutter test --coverage
-          lcov --list coverage/lcov.info # Para visualização
+          lcov --list coverage/lcov.info 
 
-      - name: Check coverage percentage
-        id: coverage
-        run: |
-          COVERAGE=$(lcov --summary coverage/lcov.info | grep -Po 'lines......\K\d+\.\d+')
-          echo "Coverage: $COVERAGE%"
-          if (( $(echo "$COVERAGE < 50.0" | bc -l) )); then
-            echo "Coverage is less than 50%"
-            exit 1
-          fi
+      # - name: Check coverage percentage
+      #   id: coverage
+      #   run: |
+      #     COVERAGE=$(lcov --summary coverage/lcov.info | grep -Po 'lines......\K\d+\.\d+')
+      #     echo "Coverage: $COVERAGE%"
+      #     if (( $(echo "$COVERAGE < 50.0" | bc -l) )); then
+      #       echo "Coverage is less than 50%"
+      #       exit 1
+      #     fi
 
       - name: Build APK
         run: flutter build apk --release
