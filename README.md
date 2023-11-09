@@ -54,6 +54,33 @@ To run the tests:
 flutter test
 ```
 
+## Continuous Integration (CI) with GitHub Actions
+
+This project utilizes GitHub Actions to implement a Continuous Integration (CI) workflow, ensuring quality and efficiency in the software development process. Each push to the repository automatically triggers a series of operations defined in the CI workflow, as outlined below:
+
+### CI Workflow:
+
+1. **Code Analysis**: Upon code push to the repository, GitHub Actions performs static analysis to identify potential issues and improvements.
+
+2. **Test Execution**: Tests are run to ensure the stability of existing functionalities.
+
+3. **Code Coverage Verification**: The workflow checks if the test coverage meets a minimum threshold (e.g., 50%).
+
+4. **App Build**: If the test coverage is adequate and the tests pass, the app is built.
+
+5. **Distribution**: After a successful build, the app is automatically distributed to Firebase App Distribution, making it available to selected testers or end-users.
+
+### Where the App is Available:
+
+After a successful build and quality checks, the app is made available on Firebase App Distribution, where selected testers can access it for testing and validation purposes before the production release.
+
+The following diagram illustrates the CI process using GitHub Actions:
+
+![CI Process with GitHub Actions](assets/doc/ci_workflow.png)
+
+This CI workflow ensures that our code is always in a release-ready state, maintaining the quality and reliability of the application.
+
+
 ### Using Melos [Optional]
 
 This project utilizes [Melos](https://melos.invertase.dev/getting-started) to facilitate command management. If you wish to use Melos, follow the steps below:

@@ -63,12 +63,10 @@ android {
     productFlavors {
             prod {
                 dimension "default"
-                resValue "string", "app_name", "RockW Prod"
             }
             dev {
                 dimension "default"
                 applicationIdSuffix ".dev"
-                resValue "string", "app_name", "RockW HOM"
                 versionNameSuffix ".dev"
             }
         }   
@@ -78,4 +76,7 @@ flutter {
     source '../..'
 }
 
-dependencies {}
+dependencies {
+    implementation(platform("com.google.firebase:firebase-bom:32.5.0"))
+    implementation("com.google.firebase:firebase-analytics")
+}

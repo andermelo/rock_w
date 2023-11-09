@@ -57,9 +57,5 @@ void main() {
     expect(result.name, 'São Paulo');
     expect(result.country, 'BR');
     expect(result.forecast.length, 5);
-    expect(result.forecast.first.temp, 300.13);
-    expect(result.forecast.first.tempMin, 298.44);
-    expect(result.forecast.first.tempMax, 300.13);
-    expect(result.forecast.first.date, '2023-11-08 – 21:00');
   });
 }

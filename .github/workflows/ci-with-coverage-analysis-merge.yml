@@ -1,0 +1,52 @@
+name: Flutter CI with Coverage, Analysis, and Firebase Distribution
+
+on: [push, pull_request]
+
+jobs:
+  build-and-distribute:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      
+      - name: Decode google-services.json
+        run: echo ${{ secrets.GOOGLE_SERVICES_JSON }} | base64 --decode > app/google-services.json
+        env:
+          GOOGLE_SERVICES_JSON: ${{ secrets.GOOGLE_SERVICES_JSON }}
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v1
+        with:
+          flutter-version: '3.0.0'
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Analyze code
+        run: flutter analyze
+
+      - name: Run tests and collect coverage
+        run: |
+          flutter test --coverage
+          lcov --list coverage/lcov.info # Para visualização
+
+      - name: Check coverage percentage
+        id: coverage
+        run: |
+          COVERAGE=$(lcov --summary coverage/lcov.info | grep -Po 'lines......\K\d+\.\d+')
+          echo "Coverage: $COVERAGE%"
+          if (( $(echo "$COVERAGE < 50.0" | bc -l) )); then
+            echo "Coverage is less than 50%"
+            exit 1
+          fi
+
+      - name: Build APK
+        run: flutter build apk --release
+
+      - name: Install Firebase CLI
+        run: curl -sL https://firebase.tools | bash
+
+      - name: Deploy to Firebase App Distribution
+        run: firebase appdistribution:distribute --app ${{ secrets.FIREBASE_APP_ID }} --token ${{ secrets.FIREBASE_TOKEN }} --groups testers --file build/app/outputs/flutter-apk/app-release.apk
+        env:
+          FIREBASE_CLI_PREVIEWS: true
