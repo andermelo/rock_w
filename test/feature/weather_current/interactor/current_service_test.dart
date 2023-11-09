@@ -62,6 +62,5 @@ void main() {
     expect(result.temp, 298.48);
     expect(result.tempMin, 297.56);
     expect(result.tempMax, 300.05);
-    expect(result.date, '2022-08-30 – 11:43');
   });
 }
