@@ -30,3 +30,21 @@ class CurrentErrorState extends CurrentState {
   @override
   List<Object> get props => [message];
 }
+
+class CurrentFilteredState extends CurrentState {
+  CurrentFilteredState(this.weather);
+
+  final WeatherEntity weather;
+
+  @override
+  List<Object> get props => [weather];
+}
+
+class CurrentNoResultState extends CurrentState {
+  CurrentNoResultState(this.message);
+
+  final String message;
+
+  @override
+  List<Object> get props => [message];
+}

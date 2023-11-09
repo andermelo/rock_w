@@ -77,14 +77,14 @@ void main() {
       verify(() => getIt.get<AppDatabase>().getData(any())).called(1);
 
       // others verify
-      expect(result.cityId, '3163858');
-      expect(result.name, 'Zocca');
-      expect(result.country, 'IT');
-      expect(result.forecast.length, 4);
-      expect(result.forecast.first.temp, 296.76);
-      expect(result.forecast.first.tempMin, 296.76);
-      expect(result.forecast.first.tempMax, 297.87);
-      expect(result.forecast.first.date, '2022-08-30 – 12:00');
+      expect(result.cityId, '3448439');
+      expect(result.name, 'São Paulo');
+      expect(result.country, 'BR');
+      expect(result.forecast.length, 5);
+      expect(result.forecast.first.temp, 300.13);
+      expect(result.forecast.first.tempMin, 298.44);
+      expect(result.forecast.first.tempMax, 300.13);
+      expect(result.forecast.first.date, '2023-11-08 – 21:00');
     });
   });
 }

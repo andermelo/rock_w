@@ -25,6 +25,7 @@ dependencies:
   intl: ^0.18.1
   connectivity_plus: ^5.0.1
   path_provider: ^2.1.1
+  diacritic: ^0.1.4
   
 
 dev_dependencies:
