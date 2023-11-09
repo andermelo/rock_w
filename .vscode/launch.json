@@ -1,25 +1,28 @@
 {
-    // Use o IntelliSense para saber mais sobre os atributos possíveis.
-    // Focalizar para exibir as descrições dos atributos existentes.
-    // Para obter mais informações, acesse: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "rock_w",
-            "request": "launch",
-            "type": "dart"
-        },
-        {
-            "name": "rock_w (profile mode)",
+            "name": "rock_w HOM",
             "request": "launch",
             "type": "dart",
-            "flutterMode": "profile"
+            "args": [
+                "--flavor",
+                "dev",
+            ]
         },
         {
             "name": "rock_w (release mode)",
             "request": "launch",
             "type": "dart",
-            "flutterMode": "release"
+            "flutterMode": "release",
+            "args": [
+                "--flavor",
+                "prd",
+                "--dart-define",
+                "API_TOKEN=",
+                "--dart-define",
+                "API_PATH=",
+            ]
         }
     ]
 }

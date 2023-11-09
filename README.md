@@ -2,6 +2,9 @@
 
 Welcome to RockW – where seamless offline functionality meets cutting-edge performance. Our project embraces an offline-first design, ensuring that your experience is uninterrupted, resilient, and fast, regardless of your internet connection.
 
+[![cover](assets/doc/github-cover.png)](https://www.figma.com/community/file/1304471029185774897/rockw-app)
+
+
 ## Key Features:
 
 - **Persistent Performance:** Enjoy a fully functional application even when you're offline.
@@ -9,8 +12,14 @@ Welcome to RockW – where seamless offline functionality meets cutting-edge per
 - **User-Centric Design:** Built with the user's needs in mind for offline access and data integrity.
 - **Resource Efficiency:** Optimized to reduce data usage and conserve battery life.
 
-## C4 Model 
-![C4 Level 2: Container Diagram of RockW App](assets/doc/c4modelnivel2.png)
+## Architecture
+
+### Design pattern
+![VIPER](assets/doc/VIPER.png)
+
+### C4 Level 2
+
+![Container Diagram of RockW App](assets/doc/c4modelnivel2.png)
 *C4 Level 2: Container Diagram of RockW App showcasing the high-level architecture. It includes the Mobile App for user interaction, the Caching Service for data retrieval efficiency, and the Local Database for offline data persistence. These components interact with the External Weather API to provide real-time weather updates and forecasts for touring bands.*
 
 
@@ -29,8 +38,14 @@ cd rock_w
 
 To run the project:
 
+>HOM
 ```bash
-flutter run
+flutter run --flavor dev
+```
+
+>PROD
+```bash
+flutter run --flavor prd --dart-define=API_TOKEN_HERE="" --dart-define=API_PATH_HERE=""
 ```
 
 To run the tests:
