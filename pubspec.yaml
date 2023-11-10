@@ -26,6 +26,10 @@ dependencies:
   connectivity_plus: ^5.0.1
   path_provider: ^2.1.1
   diacritic: ^0.1.4
+  # OBS and ERRORS
+  datadog_flutter_plugin: ^2.0.0
+  datadog_tracking_http_client: ^2.0.0
+  
   
 
 dev_dependencies:

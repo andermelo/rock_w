@@ -3,6 +3,7 @@ import 'package:get_it/get_it.dart';
 import 'package:rock_w/core/env/config_env.dart';
 import 'package:rock_w/core/http/app_cache_interceptor.dart';
 import 'package:rock_w/core/http/app_http.dart';
+import 'package:rock_w/core/logger/app_logger.dart';
 import 'package:rock_w/features/weather_forecast/entity/forecast_entity.dart';
 import 'package:rock_w/features/weather_forecast/interactor/dto/forecast_dto.dart';
 import 'package:rock_w/features/weather_forecast/interactor/service/forecast_service.dart';
@@ -17,9 +18,11 @@ class WeatherForecastServiceImpl extends WeatherForecastService {
           '${EnvironmentConfig.apiPath}forecast?lat=$lat&lon=$lon&appid=${EnvironmentConfig.apiToken}');
       ForecastEntity result = ForecastDto.fromJson(response.data).toEntity();
       return result;
-    } catch (e) {
+    } on Exception catch (e, s) {
       log(e.toString());
-      throw Exception(e);
+      AppLogger.instance.logError('Error in WeatherForecastService GET',
+          exception: e, stackTrace: s);
+      rethrow;
     }
   }
 }

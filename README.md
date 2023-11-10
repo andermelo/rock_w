@@ -31,12 +31,18 @@ In a world where connectivity can be inconsistent, an offline-first approach ens
 
 To get started with RockW, clone the repository and follow the setup instructions. Your journey towards a more reliable, user-friendly offline experience begins here!
 
+>Flutter Version: 3.13.9
+
 ```bash
 git clone https://github.com/andermelo/rock_w.git
 cd rock_w
 ```
 
 To run the project:
+
+```dart
+Flutter pub get
+```
 
 >HOM
 ```bash
@@ -45,7 +51,7 @@ flutter run --flavor dev
 
 >PROD
 ```bash
-flutter run --flavor prd --dart-define=API_TOKEN_HERE="" --dart-define=API_PATH_HERE=""
+flutter run --flavor prd --dart-define=API_TOKEN_HERE="" --dart-define=API_PATH_HERE="" --dart-define=DD_CLIENT_TOKEN="" --dart-define=DD_ENV="" --dart-define=DD_APP_ID=""
 ```
 
 To run the tests:
@@ -79,6 +85,42 @@ The following diagram illustrates the CI process using GitHub Actions:
 ![CI Process with GitHub Actions](assets/doc/ci_workflow.png)
 
 This CI workflow ensures that our code is always in a release-ready state, maintaining the quality and reliability of the application.
+
+
+## Observability and Errors with Datadog
+
+Observability is a crucial aspect in the development and maintenance of modern applications. Martin Fowler, an authority in software engineering, emphasizes the importance of observable systems, where you can understand what's happening inside your software through logs, metrics, and traces. Observability becomes critical for diagnosing issues and optimizing application performance.
+
+![DataDog](assets/doc/datadog.png)
+
+
+### Integrating Datadog in Flutter
+
+In our Flutter application, we have integrated Datadog, a powerful monitoring and analytics platform that enables us to observe and understand the state of our app. Datadog offers robust logging, application performance monitoring (APM), and metric monitoring capabilities, which are essential for maintaining the health and efficiency of the application.
+
+Here is a brief example of how we use `AppLogger`, a custom class designed to facilitate the use of Datadog in our Flutter application.
+
+### Example of Using AppLogger
+
+```dart
+// Example of logging information
+AppLogger.instance.logInfo('Application successfully started');
+
+try {
+  // Code that might throw an exception
+} catch (e, stackTrace) {
+  // Logging error using AppLogger
+  AppLogger.instance.logError('Error while executing operation', exception: e, stackTrace: stackTrace);
+}
+```
+
+### Benefits of Observability with Datadog
+
+- Rapid Problem Detection: With detailed logs, we can quickly identify where and why an error occurred.
+
+- Performance Analysis and Optimization: Metrics and traces allow us to analyze the app’s performance and identify areas for improvement.
+
+- Continuous Improvement: Through constant observation, we can continually refine our application, enhancing the user experience.
 
 
 ### Using Melos [Optional]

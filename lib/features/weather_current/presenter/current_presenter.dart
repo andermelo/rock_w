@@ -4,6 +4,7 @@ import 'package:diacritic/diacritic.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
+import 'package:rock_w/core/logger/app_logger.dart';
 import 'package:rock_w/features/weather_current/entity/weather_entity.dart';
 import 'package:rock_w/features/weather_current/interactor/service/current_service.dart';
 import 'package:rock_w/features/weather_current/presenter/current_state.dart';
@@ -19,9 +20,10 @@ class CurrentPresenter extends Cubit<CurrentState> {
           await rootBundle.loadString('assets/json/list_city.json');
       Map<String, dynamic> jsonResponse = jsonDecode(jsonString);
       return jsonResponse;
-    } catch (e) {
-      log(e.toString());
-      throw Exception(e);
+    } on Exception catch (e, s) {
+      AppLogger.instance.logError('Error in CurrentPresenter with loadJson',
+          exception: e, stackTrace: s);
+      rethrow;
     }
   }
 
@@ -45,8 +47,12 @@ class CurrentPresenter extends Cubit<CurrentState> {
       duplicateResultList = resultCities;
 
       emit(CurrentLoadedState(resultCities));
-    } catch (e) {
+    } catch (e, s) {
       emit(CurrentErrorState(e.toString()));
+      AppLogger.instance.logError(
+          'Error in CurrentPresenter with doWeatherCurrentWithCities',
+          exception: e as Exception,
+          stackTrace: s);
       log(e.toString());
     }
   }
@@ -67,6 +73,7 @@ class CurrentPresenter extends Cubit<CurrentState> {
         emit(CurrentNoResultState('No weather data found for city: $cityName'));
       }
     } else {
+      AppLogger.instance.logWarning('Weather data is not loaded yet');
       log('Weather data is not loaded yet');
     }
   }
