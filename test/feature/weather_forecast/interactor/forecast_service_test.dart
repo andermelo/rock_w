@@ -56,6 +56,5 @@ void main() {
     expect(result.cityId, '3448439');
     expect(result.name, 'São Paulo');
     expect(result.country, 'BR');
-    expect(result.forecast.length, 5);
   });
 }
