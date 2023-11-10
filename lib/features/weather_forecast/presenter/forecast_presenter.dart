@@ -19,7 +19,7 @@ class ForecastPresenter extends Cubit<ForecastState> {
       emit(ForecastErrorState(e.toString()));
       AppLogger.instance.logError(
           'Error in ForecastPresenter with weatherForecastForNDays',
-          exception: e as Exception,
+          exception: e,
           stackTrace: s);
       log(e.toString());
     }

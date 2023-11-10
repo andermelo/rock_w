@@ -51,7 +51,7 @@ class CurrentPresenter extends Cubit<CurrentState> {
       emit(CurrentErrorState(e.toString()));
       AppLogger.instance.logError(
           'Error in CurrentPresenter with doWeatherCurrentWithCities',
-          exception: e as Exception,
+          exception: e,
           stackTrace: s);
       log(e.toString());
     }

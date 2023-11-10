@@ -42,8 +42,7 @@ class AppLogger {
     _logger?.warn(message);
   }
 
-  void logError(String message,
-      {Exception? exception, StackTrace? stackTrace}) {
+  void logError(String message, {dynamic exception, StackTrace? stackTrace}) {
     _logger?.error(
       message,
       errorMessage: exception?.toString(),
