@@ -7,6 +7,7 @@ import 'package:rock_w/core/database/app_database_impl.dart';
 import 'package:rock_w/core/http/app_cache_interceptor.dart';
 import 'package:rock_w/core/http/app_http.dart';
 import 'package:rock_w/core/http/app_http_impl.dart';
+import 'package:rock_w/core/logger/app_logger.dart';
 import 'package:rock_w/features/weather_current/interactor/service/current_service.dart';
 import 'package:rock_w/features/weather_current/interactor/service/current_service_impl.dart';
 import 'package:rock_w/features/weather_forecast/interactor/service/forecast_service.dart';
@@ -21,6 +22,9 @@ class RegisterDependencies {
     AppDatabaseImpl appDatabaseImpl = AppDatabaseImpl(box: box);
     await appDatabaseImpl.init();
     getIt.registerSingleton<AppDatabase>(appDatabaseImpl);
+
+    // OBS with AppLogger
+    await AppLogger.instance.init();
 
     // HTTP DIO INJECTOR
     getIt.registerLazySingleton<AppHttp>(() => AppHttpImpl());

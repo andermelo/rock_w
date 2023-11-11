@@ -21,7 +21,7 @@ class AppLogger {
       env: EnvironmentConfig.dataDogEnv,
       site: datadog.DatadogSite.us3,
       nativeCrashReportEnabled: true,
-      firstPartyHosts: [EnvironmentConfig.apiPath],
+      firstPartyHosts: ['api.openweathermap.org'],
       rumConfiguration: datadog.DatadogRumConfiguration(
           applicationId: EnvironmentConfig.dataDogAppId),
     )..enableHttpTracking();
@@ -30,7 +30,19 @@ class AppLogger {
         .initialize(configuration, datadog.TrackingConsent.granted);
 
     _logger = datadog.DatadogSdk.instance.logs?.createLogger(
-      datadog.DatadogLoggerConfiguration(),
+      datadog.DatadogLoggerConfiguration(
+        service: "App Rock Server",
+        name: "loggerAppFlutter",
+        bundleWithRumEnabled: true,
+        bundleWithTraceEnabled: true,
+        networkInfoEnabled: true,
+        remoteSampleRate: 100,
+        customConsoleLogFunction:
+            (level, message, service, name, stackTrace, attributes) {
+          // ignore: avoid_print
+          print("$level: $message");
+        },
+      ),
     );
   }
 
@@ -48,6 +60,22 @@ class AppLogger {
       errorMessage: exception?.toString(),
       errorKind: exception?.runtimeType.toString(),
       errorStackTrace: stackTrace,
+    );
+    if (exception != null) {
+      datadog.DatadogSdk.instance.rum?.addErrorInfo(
+        message,
+        datadog.RumErrorSource.source,
+        stackTrace: stackTrace ?? StackTrace.fromString(message),
+        attributes: {'exception': exception.toString()},
+      );
+    }
+  }
+
+  void addUser(Map<String, dynamic> user) {
+    datadog.DatadogSdk.instance.setUserInfo(
+      id: user['id'],
+      name: user['name'],
+      email: user['email'],
     );
   }
 }

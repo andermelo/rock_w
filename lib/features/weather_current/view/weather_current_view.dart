@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:rock_w/core/logger/app_logger.dart';
 import 'package:rock_w/core/style/colors.dart';
 import 'package:rock_w/features/weather_current/presenter/current_presenter.dart';
 import 'package:rock_w/features/weather_current/presenter/current_state.dart';
@@ -16,6 +17,16 @@ class WeatherCurrentView extends StatefulWidget {
 
 class _WeatherCurrentViewState extends State<WeatherCurrentView> {
   CurrentPresenter currentPresenter = CurrentPresenter();
+
+  @override
+  void initState() {
+    AppLogger.instance.addUser({
+      'name': 'Anderson Melo',
+      'email': 'email@email.com',
+      'id': 'gdyasd2943hwjdhsad324edasdasd'
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

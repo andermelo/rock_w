@@ -1,7 +1,6 @@
 import 'package:datadog_flutter_plugin/datadog_flutter_plugin.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
-import 'package:rock_w/core/logger/datadog_config.dart';
 import 'package:rock_w/core/route/app_routes.dart';
 import 'package:rock_w/core/style/theme.dart';
 import 'package:rock_w/dependencies/register_dependencies.dart';
@@ -11,9 +10,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   GetIt getIt = GetIt.instance;
   await RegisterDependencies.on(getIt);
-  await DatadogSdk.runApp(configuration, TrackingConsent.granted, () async {
-    runApp(const MyApp());
-  });
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
