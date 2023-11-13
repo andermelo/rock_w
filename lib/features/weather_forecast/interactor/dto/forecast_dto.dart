@@ -2,6 +2,7 @@ import 'package:intl/intl.dart';
 import 'package:rock_w/features/weather_current/entity/weather_entity.dart';
 import 'package:rock_w/features/weather_current/interactor/dto/weather_dto.dart';
 import 'package:rock_w/features/weather_forecast/entity/forecast_entity.dart';
+import 'package:rock_w/features/weather_forecast/interactor/mapper/forecast_filter_mapper.dart';
 
 class ForecastDto {
   final String cityId;
@@ -18,30 +19,6 @@ class ForecastDto {
     required this.consultedAt,
   });
 
-  void filterForecastByUniqueDate() {
-    var now = DateTime.now();
-    var nextDay = DateTime(now.year, now.month, now.day);
-
-    var uniqueDates = <String>{};
-    var filteredList = <WeatherDto>[];
-
-    for (var weatherDto in forecast) {
-      var date = DateTime.fromMillisecondsSinceEpoch(weatherDto.dt * 1000);
-
-      if (date.isBefore(nextDay)) continue;
-
-      var dateString = DateFormat('yyyy-MM-dd').format(date);
-
-      if (uniqueDates.add(dateString) && uniqueDates.length <= 5) {
-        filteredList.add(weatherDto);
-      }
-
-      if (uniqueDates.length == 5) break;
-    }
-
-    forecast = filteredList;
-  }
-
   factory ForecastDto.fromJson(json) {
     var list = (json['list'] as List)
         .map((item) => WeatherDto.fromJson(item))
@@ -55,9 +32,7 @@ class ForecastDto {
       consultedAt: DateFormat('yyyy-MM-dd – kk:mm').format(DateTime.now()),
     );
 
-    forecastDto.filterForecastByUniqueDate();
-
-    return forecastDto;
+    return ForecastFilterMapper.filterByUniqueDate(forecastDto);
   }
 
   Map<String, dynamic> toJson() {
