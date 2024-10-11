@@ -36,7 +36,7 @@ jobs:
       - name: Check coverage percentage
         id: coverage
         run: |
-          COVERAGE=$(lcov --summary coverage/lcov.info | grep -Po 'lines......\K\d+\.\d+')
+          COVERAGE=$(dart run test_cov_console -t)
           echo "Coverage: $COVERAGE%"
           if (( $(echo "$COVERAGE < 50.0" | bc -l) )); then
             echo "Coverage is less than 50%"
